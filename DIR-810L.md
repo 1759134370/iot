@@ -52,6 +52,8 @@ https://www.dlinktw.com.tw/techsupport/ProductInfo.aspx?m=DIR-810L
 
 Detail：：
 In the component NCC, there is an unsafe 'sprintf' that does not limit the parameters transferred from the front end, allowing an attacker to make stack overflows
+
+
 ![PX(SXXK$@NT%)QZPUSAPES1](https://user-images.githubusercontent.com/84966968/176329882-95401997-0867-4251-ad53-02e75fa55045.png)
 
 
