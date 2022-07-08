@@ -2,7 +2,7 @@ Dsl-g2452dg firmware download link https://www.dlink.com.sg/Downloads/DSL-G2452D
 
 The execute_cmd.cgi file exists in the Cgi-bin directory of the DSL-g2452DG firmware. Accessing this file can cause command injection
 
-Dsl-g2452dg is found to have the classic insecure IDENTITY authentication vulnerability CVE-2020-24580
+
 
 So you can attack in the same way,
 
